@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+
 const PersonForm = (props) => {
-	const [nombre, setNombre] = useState("");
+	const [nombreTarea, setNombreTarea] = useState("");
+
 	const changeName = (e) => {
 		//console.log(e.target.value);
 		const auxName = e.target.value;
-		setNombre(auxName);
+		setNombreTarea(auxName);
 	};
 	const guardarNombre = () => {
-		if (tareas !== null && tareas.length <= 0) {
-		} else props.agregarTarea(nombre);
+		if (nombreTarea !== null && nombreTarea.length <= 0) {
+		} else props.agregarTarea(nombreTarea);
 	};
 	return (
 		<div className="container">
