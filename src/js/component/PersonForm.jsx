@@ -1,27 +1,37 @@
 import React, { useState } from "react";
+import "../../styles/PersonForm.css";
 
 const PersonForm = (props) => {
-	const [nombreTarea, setNombreTarea] = useState("");
+	const [change, setChange] = useState("");
 
-	const changeName = (e) => {
-		//console.log(e.target.value);
-		const auxName = e.target.value;
-		setNombreTarea(auxName);
+	const onChange = (text) => {
+		setChange(text.target.value);
 	};
-	const guardarNombre = () => {
-		if (nombreTarea !== null && nombreTarea.length <= 0) {
-		} else props.agregarTarea(nombreTarea);
+
+	const onSave = () => {
+		if (change !== null && change.length <= 0)
+			return alert("No ha introducido ninguna tarea");
+		else return props.addTask(change);
 	};
+
 	return (
-		<div className="container">
-			<input type="text" placeholder="Tarea Aqui" onChange={changeName} />
+		<>
+			<input
+				type="text"
+				className="tarea-input"
+				placeholder="Ingrese tarea aqui"
+				onChange={onChange}
+			/>
+
 			<button
 				onClick={() => {
-					guardarNombre();
-				}}>
+					onSave();
+				}}
+				className="tarea-boton">
 				Guardar
 			</button>
-		</div>
+		</>
 	);
 };
+
 export default PersonForm;

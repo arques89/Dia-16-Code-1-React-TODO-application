@@ -1,39 +1,53 @@
 import React, { useState } from "react";
+
+//include images into your bundle
 import PersonForm from "./PersonForm.jsx";
+import "../../styles/Home.css";
 
+//create your first component
 const Home = () => {
-	const [tareas, setTareas] = useState([]);
+	const [tasks, setTasks] = useState([]);
 
-	const agregarTarea = (nombreTarea) => {
-		const auxTarea = tareas.concat(nombreTarea); //tareas.push(nombreTarea)
-		setTareas(auxTarea);
+	const addTask = (task) => {
+		const auxTask = tasks.concat(task);
+		setTasks(auxTask);
 	};
-	const eliminarTarea = (index) => {
-		const auxTarea = tareas.filter((tarea, auxIndex) => {
-			if (index !== auxIndex) {
-				return tarea;
-			}
+	const deleteTask = (index) => {
+		const auxDeleteTask = tasks.filter((task, ind) => {
+			if (index !== ind) return task;
 		});
-		setTareas(auxTarea);
+		setTasks(auxDeleteTask);
 	};
+
 	return (
-		<div className="lista">
-			<h1 className="text-center mt-5">TODO LIST</h1>
-			<PersonForm agregarTarea={agregarTarea} />
-			{tareas.map((tarea, index) => {
-				return (
-					<>
-						<h3> {tarea} </h3>
-						<button
-							onClick={() => {
-								eliminarTarea(index);
-							}}>
-							X
-						</button>
-					</>
-				);
-			})}
-		</div>
+		<>
+			<h1 className="principal">4Geeks Academy</h1>
+			<div className="text-center">
+				<h1>todo</h1>
+				<PersonForm addTask={addTask} />
+				{tasks.map((tarea, index) => {
+					return (
+						<>
+							<div className="el">
+								<div key={index} className="tarea-texto">
+									<h3>{tarea}</h3>
+								</div>
+								<div className="botonera">
+									<button
+										onClick={() => {
+											deleteTask(index);
+										}}
+										className="boton">
+										X
+									</button>
+								</div>
+							</div>
+						</>
+					);
+				})}
+			</div>
+		</>
 	);
 };
+
 export default Home;
